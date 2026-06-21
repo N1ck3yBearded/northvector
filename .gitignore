@@ -30,3 +30,7 @@ dist-ssr
 
 # Claude Code
 .claude/settings.local.json
+
+# Studio internals - local only, never published
+CLAUDE.md
+.claude/
