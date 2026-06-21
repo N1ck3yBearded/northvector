@@ -15,8 +15,9 @@ export function useLenis() {
       smoothWheel: true,
     })
     lenis.scrollTo(0, { immediate: true })
-    // expose for debugging / preview tooling
-    ;(window as unknown as { lenis?: Lenis }).lenis = lenis
+    if (import.meta.env.DEV) {
+      ;(window as unknown as { lenis?: Lenis }).lenis = lenis
+    }
 
     let raf = 0
     const loop = (time: number) => {

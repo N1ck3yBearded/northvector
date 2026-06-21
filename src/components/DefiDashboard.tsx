@@ -17,14 +17,15 @@ function fmtUsd(n: number): string {
 function Donut({ holdings }: { holdings: Holding[] }) {
   const r = 54
   const C = 2 * Math.PI * r
-  let acc = 0
+  // Pre-compute fractions and their running offsets without mutating outer state during render.
+  const fracs = holdings.map((h) => Math.max(h.pct / 100, 0))
+  const offsets = fracs.map((_, i) => fracs.slice(0, i).reduce((sum, f) => sum + f, 0))
   return (
     <svg viewBox="0 0 140 140" className="h-[136px] w-[136px] -rotate-90" aria-hidden="true">
       <circle cx="70" cy="70" r={r} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth={15} />
       {holdings.map((h, i) => {
-        const frac = Math.max(h.pct / 100, 0)
-        const dash = frac * C
-        const el = (
+        const dash = fracs[i] * C
+        return (
           <circle
             key={h.symbol + i}
             cx="70"
@@ -34,11 +35,9 @@ function Donut({ holdings }: { holdings: Holding[] }) {
             stroke={SEG[i % SEG.length]}
             strokeWidth={15}
             strokeDasharray={`${dash} ${C - dash}`}
-            strokeDashoffset={-acc * C}
+            strokeDashoffset={-offsets[i] * C}
           />
         )
-        acc += frac
-        return el
       })}
     </svg>
   )

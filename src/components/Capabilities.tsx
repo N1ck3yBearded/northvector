@@ -47,7 +47,7 @@ export default function Capabilities() {
               />
               <div className="relative flex items-center justify-between">
                 <span className="h-2.5 w-2.5 rounded-full" style={{ background: accentHex[c.accent] }} />
-                <span className="font-mono text-[11px] uppercase tracking-widest text-mist-700">
+                <span className="font-mono text-[11px] uppercase tracking-widest text-mist-500">
                   0{i + 1}
                 </span>
               </div>

@@ -40,25 +40,6 @@ export default {
       letterSpacing: {
         ultra: '0.32em',
       },
-      keyframes: {
-        marquee: {
-          '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(-50%)' },
-        },
-        floaty: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-8px)' },
-        },
-        shimmer: {
-          '0%': { backgroundPosition: '200% 0' },
-          '100%': { backgroundPosition: '-200% 0' },
-        },
-      },
-      animation: {
-        marquee: 'marquee 36s linear infinite',
-        floaty: 'floaty 7s ease-in-out infinite',
-        shimmer: 'shimmer 8s linear infinite',
-      },
     },
   },
   plugins: [],

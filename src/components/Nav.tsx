@@ -50,7 +50,7 @@ export default function Nav() {
           href="#contact"
           className="hidden rounded-full border border-amber/40 bg-amber/10 px-4 py-2 text-[13px] font-medium text-amber transition-colors duration-200 hover:bg-amber/20 md:inline-block"
         >
-          Start a project
+          Let’s talk
         </a>
 
         <button
@@ -91,7 +91,7 @@ export default function Nav() {
               onClick={() => setOpen(false)}
               className="mt-1 rounded-full border border-amber/40 bg-amber/10 px-4 py-2.5 text-center text-sm font-medium text-amber"
             >
-              Start a project
+              Let’s talk
             </a>
           </div>
         </motion.div>

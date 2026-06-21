@@ -2,14 +2,10 @@ import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 
 /**
- * @webloved recipe #4, faithfully: "Draw each curved line as an SVG path, then
- * animate stroke-dashoffset from full length to zero — the stroke draws itself.
- * Stagger the delay on each path… dozens of lines flow in sequence."
- *
- * The lines aren't random sine waves — they're streamlines traced through a
- * flow-field (a sum-of-sines vector field), which is what gives the coherent,
- * woven "fiber bundle" look instead of noise. Framer's `pathLength` maps to
- * stroke-dashoffset under the hood, so the draw-in is exactly his technique.
+ * Animated "fiber bundle" background. Each line is a streamline traced through a
+ * sum-of-sines flow-field — not a random sine wave — which is what gives the
+ * coherent, woven look instead of noise. Framer's `pathLength` maps to
+ * stroke-dashoffset, so every path draws itself in, staggered, on mount.
  */
 
 const ease = [0.16, 1, 0.3, 1] as const

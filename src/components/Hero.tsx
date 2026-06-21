@@ -101,14 +101,14 @@ export default function Hero() {
           transition={{ duration: 0.6, ease, delay: 0.1 }}
           className="mb-8 flex flex-wrap items-center gap-x-6 gap-y-2"
         >
-          <span className="eyebrow text-amber">[ {BRAND.location} ]</span>
-          <span className="eyebrow text-mist-500">[ web · studio ]</span>
+          <span className="eyebrow text-amber">{BRAND.location}</span>
+          <span className="eyebrow text-mist-500">web · studio</span>
         </motion.div>
 
         <h1 className="display text-[clamp(3.2rem,12vw,10.5rem)] font-medium leading-[0.9] tracking-[-0.03em] text-mist-100">
           <Rise delay={0.12}>{HERO.lead}</Rise>
           <Rise delay={0.26} className="mt-0.5">
-            We build <CyclingNoun />
+            I build <CyclingNoun />
           </Rise>
         </h1>
 

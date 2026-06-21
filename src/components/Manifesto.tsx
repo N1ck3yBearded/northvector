@@ -41,7 +41,7 @@ export default function Manifesto() {
           whileInView={{ opacity: 1, scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, ease, delay: 0.3 }}
-          className="mt-16 h-px w-40 origin-left bg-gradient-to-r from-amber via-jade to-transparent"
+          className="mt-16 h-px w-40 origin-left bg-gradient-to-r from-amber/60 to-transparent"
         />
       </div>
     </section>

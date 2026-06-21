@@ -28,7 +28,7 @@ export default function Contact() {
           transition={{ duration: 0.8, ease, delay: 0.08 }}
           className="display mx-auto mt-7 max-w-3xl text-[clamp(2.4rem,6.5vw,5rem)] font-medium leading-[0.98] tracking-[-0.01em] text-mist-100"
         >
-          {CONTACT.title} <span className="shimmer-text italic">{CONTACT.titleAccent}</span>
+          {CONTACT.title} <span className="italic text-amber">{CONTACT.titleAccent}</span>
         </motion.h2>
 
         <motion.p
@@ -56,7 +56,7 @@ export default function Contact() {
             <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
           </a>
           <p className="mt-7 font-mono text-[11px] uppercase tracking-ultra text-mist-500">
-            usually replies within a day · {BRAND.location}
+            {BRAND.founder} replies personally, usually same day · {BRAND.location}
           </p>
         </motion.div>
       </div>

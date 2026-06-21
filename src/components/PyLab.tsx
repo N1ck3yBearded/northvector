@@ -112,14 +112,14 @@ _buf.getvalue()`
           transition={{ duration: 0.7, ease }}
           className="max-w-2xl"
         >
-          <span className="eyebrow text-teal">Live · not a screenshot</span>
+          <span className="eyebrow text-teal">Live · runs in your browser</span>
           <h2 className="display mt-5 text-[clamp(2rem,5vw,3.8rem)] font-medium leading-[1.02] tracking-[-0.01em] text-mist-100">
             Real Python, <span className="italic text-teal">running right here.</span>
           </h2>
           <p className="mt-5 text-[15px] leading-relaxed text-mist-300">
-            This isn’t a video of a terminal. It’s actual CPython compiled to WebAssembly, executing in
-            your browser. Edit the code, hit Run. When we say we build data &amp; Python features, this is
-            the real thing — no backend required.
+            This is CPython compiled to WebAssembly, running in your browser — no backend, no server
+            round-trip. Edit the code, hit Run. When I say I build data &amp; Python features, I’d rather
+            show you than tell you.
           </p>
         </motion.div>
 

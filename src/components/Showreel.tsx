@@ -78,7 +78,7 @@ function EditorialScene() {
               Type that carries the brand. Measured columns, real hierarchy, and white space used on purpose.
             </p>
             <p className="text-[13px] leading-relaxed text-paper-900/70">
-              The same studio that builds the dark, kinetic stuff knows when to step back and let the work breathe.
+              The same person who builds the dark, kinetic stuff also knows when to step back and let the work breathe.
             </p>
           </div>
           <div className="mt-6 flex gap-2">
@@ -118,11 +118,11 @@ export default function Showreel() {
         >
           <span className="eyebrow text-jade">Showreel</span>
           <h2 className="display mt-5 text-[clamp(2rem,5vw,3.8rem)] font-medium leading-[1.02] tracking-[-0.01em] text-mist-100">
-            One studio. <span className="shimmer-text italic">Any</span> style.
+            One person. <span className="italic text-amber">Any</span> style.
           </h2>
           <p className="mt-5 text-[15px] leading-relaxed text-mist-300">
-            We don’t have a single house look — we have range. The same hands build the dark and kinetic,
-            the light and editorial, and the calm and structured. Three proofs:
+            I don’t have one signature look. Below are three builds in three different styles — dark 3D,
+            quiet editorial, a live product UI — all running right here, not screenshots.
           </p>
         </motion.div>
 

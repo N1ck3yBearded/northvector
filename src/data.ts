@@ -1,16 +1,16 @@
-// ── Northvector — a studio where the idea meets the build ──────────────
-// Voice is "we". No personal names — this is the brand.
+// ── Northvector — all site copy lives here. ──────────────
+// Voice is first-person: this is Nick's studio, and the site says so plainly.
 
 export const BRAND = {
   name: 'Northvector',
-  tagline: 'Where the idea meets the build.',
-  // Brand inbox — placeholder. Point this at your real address, a form, or Calendly.
-  // No personal email on the site: this is the studio, not a person.
+  tagline: 'I build web products that actually ship.',
+  // Brand inbox — placeholder. Point this at a real address, a form, or Calendly before launch.
   contact: 'hello@northvector.studio',
   location: 'Toronto · remote worldwide',
+  founder: 'Nick',
 }
 
-// Hero: "We build ___" — the noun cycles to say "anything the web can be".
+// Hero: "I build ___" — the noun cycles to say "anything the web can be".
 export const BUILD_NOUNS = [
   'web apps',
   'landing pages',
@@ -24,16 +24,15 @@ export const BUILD_NOUNS = [
 
 export const HERO = {
   lead: 'You bring the idea.',
-  leadAccent: 'We build it.',
-  sub: 'Northvector is a studio where human intent meets machine-grade execution. Tell us what the web should do — we make it real, in whatever form it needs to take.',
+  sub: "I'm Nick. I design and build web products end to end: sites, dashboards, AI features. You bring the problem, I build the thing that solves it.",
 }
 
 export const MANIFESTO = {
-  kicker: 'The idea',
+  kicker: 'How I work',
   lines: [
-    'An idea is only worth as much as its execution.',
-    'So we pair the two: a mind that imagines, and a craft that builds — fast, precise, without the usual back-and-forth.',
-    'No fixed house style. No “that’s not possible.” Just the right thing, built right.',
+    'An idea is only worth as much as what gets built from it.',
+    'I keep the whole thing in one head: design, code, and the call on what actually matters. No handoffs, no telephone game between a designer and a dev who never talk.',
+    'No house style I force onto everything. No "that’s not possible." I work out what the problem really needs, then build exactly that.',
   ],
 }
 
@@ -49,29 +48,29 @@ export const CAPABILITIES: Capability[] = [
   {
     id: 'webapps',
     title: 'Web apps & SaaS',
-    blurb: 'Full products with auth, dashboards and flows — from MVP to production.',
+    blurb: 'Full products: login, dashboards, the flows behind them. From a first MVP to something you run in production.',
     accent: 'jade',
     tags: ['React', 'Auth', 'Realtime'],
   },
   {
     id: 'landing',
     title: 'Landing & brand sites',
-    blurb: 'Conversion-minded pages with a point of view — designed, not generated.',
+    blurb: 'Pages with a real point of view, built to convert. Not a template with your logo dropped on top.',
     accent: 'amber',
     tags: ['Conversion', 'Design', 'SEO'],
   },
   {
     id: 'immersive',
     title: 'Immersive & 3D',
-    blurb: 'WebGL, shaders and scroll-driven worlds when the product deserves a stage.',
-    accent: 'dusk',
+    blurb: 'WebGL, shaders and scroll-driven scenes, for when the product deserves a stage instead of a page.',
+    accent: 'jade',
     tags: ['WebGL', 'Three.js', 'Motion'],
   },
   {
     id: 'data',
     title: 'Data, Python & AI',
-    blurb: 'Scrapers, pipelines, in-browser compute and AI features wired into the product.',
-    accent: 'teal',
+    blurb: 'Scrapers, pipelines and AI features wired into the product. The Python lab below runs in your browser right now.',
+    accent: 'amber',
     tags: ['Python', 'Pipelines', 'AI'],
   },
 ]
@@ -92,7 +91,7 @@ export const SCENES: Scene[] = [
     index: '01',
     kicker: 'Immersive',
     title: 'Worlds you scroll through.',
-    body: 'Real-time WebGL — light, depth and motion rendered live in the browser. No video loop faking it.',
+    body: 'Real-time WebGL: light, depth and motion, all rendered live in the browser as you scroll.',
     style: 'Dark · cinematic · GPU-drawn',
     accent: 'dusk',
   },
@@ -100,8 +99,8 @@ export const SCENES: Scene[] = [
     id: 'editorial',
     index: '02',
     kicker: 'Editorial',
-    title: 'Quiet, confident, light.',
-    body: 'When the work is the message: generous space, a real typographic voice, nothing shouting.',
+    title: 'When the work speaks first.',
+    body: 'Sometimes the best interface is type, space and restraint. I know when to step back and let the work talk.',
     style: 'Light · airy · serif',
     accent: 'amber',
   },
@@ -110,13 +109,13 @@ export const SCENES: Scene[] = [
     index: '03',
     kicker: 'Product',
     title: 'Interfaces that earn trust.',
-    body: 'A live DeFi dashboard — real on-chain balances and prices, pulled keyless straight in the browser. Not a mock: the data is real.',
+    body: 'A live DeFi dashboard pulling real on-chain balances and prices, keyless, straight in the browser. The numbers are real.',
     style: 'Live · on-chain · keyless',
     accent: 'jade',
   },
 ]
 
-// Work — kept deliberately understated: a single quiet line of proof.
+// Work — kept deliberately understated: a quiet line of proof.
 export const WORK = [
   { name: 'Knock', kind: 'home-services marketplace', link: null },
   { name: 'QuoteCannon', kind: 'AI quote SaaS', link: null },
@@ -127,7 +126,7 @@ export const WORK = [
 
 export const CONTACT = {
   kicker: 'Start something',
-  title: 'Bring the idea.',
-  titleAccent: 'We’ll build it.',
-  body: 'A line about what you’re imagining is enough. We’ll tell you straight whether it’s worth building — and how we’d do it.',
+  title: 'Tell me the idea.',
+  titleAccent: "I’ll build it.",
+  body: "A couple of lines about what you’re imagining is enough. I’ll tell you straight whether it’s worth building, and how I’d do it.",
 }
