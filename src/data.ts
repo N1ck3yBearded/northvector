@@ -117,11 +117,8 @@ export const SCENES: Scene[] = [
 
 // Work — kept deliberately understated: a quiet line of proof.
 export const WORK = [
-  { name: 'Knock', kind: 'home-services marketplace', link: null },
-  { name: 'QuoteCannon', kind: 'AI quote SaaS', link: null },
-  { name: 'Nails by Firs', kind: 'trilingual brand site', link: 'https://nailsbyfirs.netlify.app' },
-  { name: 'Sable & Roll', kind: 'conversion site', link: null },
-  { name: 'PaidFaster', kind: 'productized tool', link: null },
+  { name: 'QuoteCannon', kind: 'quoting tool for painters', link: 'https://quotecannon.vercel.app' },
+  { name: 'Knock', kind: 'home-services marketplace', link: 'https://knock-lyart.vercel.app' },
 ]
 
 export const CONTACT = {
