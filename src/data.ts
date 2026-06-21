@@ -110,8 +110,8 @@ export const SCENES: Scene[] = [
     index: '03',
     kicker: 'Product',
     title: 'Interfaces that earn trust.',
-    body: 'Dashboards and SaaS surfaces — legible, fast, and honest about the data behind them.',
-    style: 'Glass · structured · calm',
+    body: 'A live DeFi dashboard — real on-chain balances and prices, pulled keyless straight in the browser. Not a mock: the data is real.',
+    style: 'Live · on-chain · keyless',
     accent: 'jade',
   },
 ]

@@ -152,7 +152,7 @@ export default function Hero() {
           className="h-full w-full"
           count={7}
           accent="#d6a86a"
-          accentRatio={1}
+          accentIndices={[0, 1, 2, 3, 4, 5, 6]}
           baseOpacity={0.6}
           strokeBase={1.2}
           delayBase={0.6}

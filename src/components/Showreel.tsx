@@ -1,6 +1,7 @@
 import { Suspense, lazy, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { SCENES } from '../data'
+import DefiDashboard from './DefiDashboard'
 
 const ImmersiveCanvas = lazy(() => import('./ImmersiveCanvas'))
 const ease = [0.16, 1, 0.3, 1] as const
@@ -93,54 +94,13 @@ function EditorialScene() {
   )
 }
 
-/* 03 — Product: glass SaaS dashboard mock */
+/* 03 — Product: a real, live DeFi dashboard (no mock) */
 function ProductScene() {
   const scene = SCENES[2]
-  const bars = [42, 68, 55, 81, 63, 92, 74]
   return (
     <div className="relative grid items-center gap-10 lg:grid-cols-[0.85fr_1.15fr]">
       <SceneHeader scene={scene} />
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease }}
-        className="relative overflow-hidden rounded-3xl border border-white/10 bg-[radial-gradient(120%_120%_at_30%_0%,rgba(127,177,196,0.14),transparent_60%)] p-6 backdrop-blur-xl"
-      >
-        {/* top stat row */}
-        <div className="grid grid-cols-3 gap-3">
-          {[
-            { k: 'MRR', v: '$48.2k', d: '+12%' },
-            { k: 'Active', v: '3,120', d: '+4.1%' },
-            { k: 'Churn', v: '1.8%', d: '-0.3%' },
-          ].map((s) => (
-            <div key={s.k} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-              <div className="font-mono text-[10px] uppercase tracking-widest text-mist-500">{s.k}</div>
-              <div className="mt-2 text-2xl font-semibold text-mist-100">{s.v}</div>
-              <div className="mt-1 font-mono text-[11px] text-jade">{s.d}</div>
-            </div>
-          ))}
-        </div>
-        {/* chart */}
-        <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-          <div className="flex items-center justify-between">
-            <span className="text-[13px] text-mist-300">Revenue · 7d</span>
-            <span className="font-mono text-[11px] text-mist-500">live</span>
-          </div>
-          <div className="mt-5 flex h-28 items-end gap-2">
-            {bars.map((h, i) => (
-              <motion.div
-                key={i}
-                initial={{ height: 0 }}
-                whileInView={{ height: `${h}%` }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, ease, delay: i * 0.05 }}
-                className="flex-1 rounded-t bg-gradient-to-t from-teal/30 to-teal"
-              />
-            ))}
-          </div>
-        </div>
-      </motion.div>
+      <DefiDashboard />
     </div>
   )
 }
