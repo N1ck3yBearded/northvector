@@ -3,7 +3,7 @@
 
 export const BRAND = {
   name: 'Northvector',
-  tagline: 'I build web products that actually ship.',
+  tagline: 'One person. The whole product. Idea to live.',
   // Brand inbox — placeholder. Point this at a real address, a form, or Calendly before launch.
   contact: 'hello@northvector.studio',
   location: 'Toronto · remote worldwide',
@@ -24,7 +24,7 @@ export const BUILD_NOUNS = [
 
 export const HERO = {
   lead: 'You bring the idea.',
-  sub: "I'm Nick. I design and build web products end to end: sites, dashboards, AI features. You bring the problem, I build the thing that solves it.",
+  sub: "I'm Nick. Two lines about the problem is enough — I come back with the thing that solves it, designed and coded end to end, live and running. One head, no handoffs.",
 }
 
 export const MANIFESTO = {
@@ -55,7 +55,7 @@ export const CAPABILITIES: Capability[] = [
   {
     id: 'landing',
     title: 'Landing & brand sites',
-    blurb: 'Pages with a real point of view, built to convert. Not a template with your logo dropped on top.',
+    blurb: "Not a template with your logo dropped on top. A page that makes an argument, then makes people act on it.",
     accent: 'amber',
     tags: ['Conversion', 'Design', 'SEO'],
   },

@@ -104,7 +104,6 @@ function compile(gl: WebGLRenderingContext, type: number, src: string): WebGLSha
 export default function ImmersiveCanvas({ active = true }: { active?: boolean }) {
   const ref = useRef<HTMLCanvasElement>(null)
   const activeRef = useRef(active)
-  activeRef.current = active
   const kickRef = useRef<(() => void) | null>(null)
 
   useEffect(() => {
@@ -212,6 +211,7 @@ export default function ImmersiveCanvas({ active = true }: { active?: boolean })
   }, [])
 
   useEffect(() => {
+    activeRef.current = active
     if (active) kickRef.current?.()
   }, [active])
 

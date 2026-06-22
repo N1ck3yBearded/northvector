@@ -33,7 +33,7 @@ function shortAngle(d: number): number {
 
 export default function HeroField({ reduced = false }: { reduced?: boolean }) {
   const ref = useRef<SVGSVGElement>(null)
-  const vecs = useMemo(buildGrid, [])
+  const vecs = useMemo(() => buildGrid(), [])
 
   useEffect(() => {
     if (reduced) return
