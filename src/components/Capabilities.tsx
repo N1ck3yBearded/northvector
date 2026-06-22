@@ -21,13 +21,13 @@ export default function Capabilities() {
           className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end"
         >
           <div className="max-w-xl">
-            <span className="eyebrow text-amber">What we build</span>
+            <span className="eyebrow text-amber">What I build</span>
             <h2 className="display mt-5 text-[clamp(2rem,5vw,3.8rem)] font-medium leading-[1.02] tracking-[-0.01em] text-mist-100">
               Whatever the web needs to be.
             </h2>
           </div>
           <p className="max-w-xs text-[14px] leading-relaxed text-mist-500">
-            Not a menu of templates — a way of working. Bring the problem; we pick the form that fits.
+            Not a menu of templates — a way of working. Bring the problem; I pick the form that fits.
           </p>
         </motion.div>
 
