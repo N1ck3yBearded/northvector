@@ -1,11 +1,8 @@
-// Live on-chain portfolio for the studio's DeFi dashboard flagship.
-// Keyless by design: balances + prices from Blockscout's public API —
-// no API key, no wallet connection, no cost. Read-only public data only.
-//
-// Spam-proof: a mainnet wallet holds thousands of junk airdrops, many with
-// faked exchange rates. So we don't trust "all tokens" — we intersect the
-// wallet's balances with a curated allowlist of blue-chip contracts. Real
-// data, but spam physically cannot appear.
+// Live on-chain portfolio — keyless (Blockscout public API).
+// Paste any ETH address or ENS name. Spam-proofed via a curated blue-chip
+// allowlist: a mainnet wallet holds thousands of junk airdrops (many with
+// faked exchange rates), so we only count known blue-chip contracts. Real
+// data, but spam can't appear.
 
 export type Holding = {
   symbol: string
@@ -23,11 +20,16 @@ export type Portfolio = {
   live: boolean
 }
 
-const SHOWCASE_LABEL = 'vitalik.eth'
-const SHOWCASE_ADDRESS = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+const BASE = 'https://eth.blockscout.com/api/v2'
+const ADDR_RE = /^0x[a-fA-F0-9]{40}$/
 const WETH = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
 const TOP_N = 6
 const MIN_USD = 20
+
+export const SHOWCASE = {
+  label: 'vitalik.eth',
+  address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+}
 
 // Curated blue-chip ERC-20 allowlist, keyed by lowercased contract address.
 const ALLOWLIST: Record<string, { symbol: string; name: string }> = {
@@ -46,8 +48,7 @@ const ALLOWLIST: Record<string, { symbol: string; name: string }> = {
   '0x5a98fcbea516cf06857215779fd812ca3bef1b32': { symbol: 'LDO', name: 'Lido DAO' },
 }
 
-// Clearly-labeled sample so the widget never renders broken if the public
-// endpoint is down or CORS-blocked. Shown as "sample" — never as "live".
+// Labeled sample for the showcase, used only if the public API is unreachable.
 const FALLBACK_ITEMS: { symbol: string; name: string; usd: number }[] = [
   { symbol: 'ETH', name: 'Ethereum', usd: 9_700 },
   { symbol: 'ENS', name: 'Ethereum Name Service', usd: 5_400 },
@@ -56,15 +57,21 @@ const FALLBACK_ITEMS: { symbol: string; name: string; usd: number }[] = [
   { symbol: 'USDC', name: 'USD Coin', usd: 60 },
 ]
 
-function build(items: { symbol: string; name: string; usd: number }[], live: boolean): Portfolio {
+export function shortAddress(a: string): string {
+  return `${a.slice(0, 6)}…${a.slice(-4)}`
+}
+
+function build(
+  label: string,
+  address: string,
+  items: { symbol: string; name: string; usd: number }[],
+  live: boolean
+): Portfolio {
   const sorted = [...items].sort((a, b) => b.usd - a.usd)
   const total = sorted.reduce((s, i) => s + i.usd, 0)
   const top = sorted.slice(0, TOP_N)
   const rest = sorted.slice(TOP_N)
-  const holdings: Holding[] = top.map((i) => ({
-    ...i,
-    pct: total ? (i.usd / total) * 100 : 0,
-  }))
+  const holdings: Holding[] = top.map((i) => ({ ...i, pct: total ? (i.usd / total) * 100 : 0 }))
   if (rest.length) {
     const restUsd = rest.reduce((s, i) => s + i.usd, 0)
     holdings.push({
@@ -74,62 +81,80 @@ function build(items: { symbol: string; name: string; usd: number }[], live: boo
       pct: total ? (restUsd / total) * 100 : 0,
     })
   }
-  return {
-    label: SHOWCASE_LABEL,
-    address: SHOWCASE_ADDRESS,
-    chain: 'Ethereum',
-    totalUsd: total,
-    holdings,
-    live,
-  }
+  return { label, address, chain: 'Ethereum', totalUsd: total, holdings, live }
 }
 
+// Resolve a 0x address or an ENS name (name.eth) to { address, label }.
+export async function resolveInput(input: string): Promise<{ address: string; label: string }> {
+  const q = input.trim()
+  if (ADDR_RE.test(q)) return { address: q.toLowerCase(), label: shortAddress(q) }
+  if (/^[a-z0-9-]+\.eth$/i.test(q)) {
+    try {
+      const r = await fetch(`https://api.ensideas.com/ens/resolve/${encodeURIComponent(q.toLowerCase())}`)
+      const j = (await r.json()) as { address?: string }
+      if (j?.address && ADDR_RE.test(j.address)) {
+        return { address: j.address.toLowerCase(), label: q.toLowerCase() }
+      }
+    } catch {
+      /* fall through to the error below */
+    }
+    throw new Error(`Couldn't resolve “${q}”`)
+  }
+  throw new Error('Enter an ETH address (0x…) or an ENS name (name.eth)')
+}
+
+// Fetch a portfolio for any address. Throws on network failure; returns
+// empty holdings if the wallet holds no tracked blue-chip assets.
+export async function fetchPortfolio(address: string, label: string): Promise<Portfolio> {
+  const [balRes, addrRes] = await Promise.all([
+    fetch(`${BASE}/addresses/${address}/token-balances`),
+    fetch(`${BASE}/addresses/${address}`),
+  ])
+  if (!balRes.ok || !addrRes.ok) throw new Error('Network error — try again')
+
+  const balances = (await balRes.json()) as Array<{
+    value: string
+    token: { address_hash?: string; decimals?: string; exchange_rate?: string | null }
+  }>
+  const addr = (await addrRes.json()) as { coin_balance?: string }
+
+  const items: { symbol: string; name: string; usd: number }[] = []
+  let ethPrice = 0
+
+  for (const b of Array.isArray(balances) ? balances : []) {
+    const key = (b?.token?.address_hash || '').toLowerCase()
+    const allow = ALLOWLIST[key]
+    const rate = Number(b?.token?.exchange_rate || 0)
+    if (!allow || !rate) continue
+    if (key === WETH) ethPrice = rate
+    const decimals = Number(b.token.decimals || 18)
+    const usd = (Number(b.value) / Math.pow(10, decimals)) * rate
+    if (usd >= MIN_USD) items.push({ symbol: allow.symbol, name: allow.name, usd })
+  }
+
+  if (!ethPrice) {
+    try {
+      const pr = await fetch('https://coins.llama.fi/prices/current/coingecko:ethereum')
+      const pj = (await pr.json()) as { coins: Record<string, { price: number }> }
+      ethPrice = pj?.coins?.['coingecko:ethereum']?.price || 0
+    } catch {
+      ethPrice = 0
+    }
+  }
+  const ethAmt = Number(addr?.coin_balance || 0) / 1e18
+  const ethUsd = ethAmt * ethPrice
+  if (ethUsd >= MIN_USD) items.unshift({ symbol: 'ETH', name: 'Ethereum', usd: ethUsd })
+
+  return build(label, address, items, true)
+}
+
+// Default showcase wallet, with a labeled sample fallback if the API is down.
 export async function fetchShowcasePortfolio(): Promise<Portfolio> {
   try {
-    const base = 'https://eth.blockscout.com/api/v2'
-    const [balRes, addrRes] = await Promise.all([
-      fetch(`${base}/addresses/${SHOWCASE_ADDRESS}/token-balances`),
-      fetch(`${base}/addresses/${SHOWCASE_ADDRESS}`),
-    ])
-    if (!balRes.ok || !addrRes.ok) throw new Error('blockscout unavailable')
-
-    const balances = (await balRes.json()) as Array<{
-      value: string
-      token: { address_hash?: string; decimals?: string; exchange_rate?: string | null }
-    }>
-    const addr = (await addrRes.json()) as { coin_balance?: string }
-
-    const items: { symbol: string; name: string; usd: number }[] = []
-    let ethPrice = 0
-
-    for (const b of Array.isArray(balances) ? balances : []) {
-      const key = (b?.token?.address_hash || '').toLowerCase()
-      const allow = ALLOWLIST[key]
-      const rate = Number(b?.token?.exchange_rate || 0)
-      if (!allow || !rate) continue
-      if (key === WETH) ethPrice = rate // WETH tracks the ETH price
-      const decimals = Number(b.token.decimals || 18)
-      const usd = (Number(b.value) / Math.pow(10, decimals)) * rate
-      if (usd >= MIN_USD) items.push({ symbol: allow.symbol, name: allow.name, usd })
-    }
-
-    // Native ETH — price it from WETH, or fall back to DeFiLlama if WETH absent.
-    if (!ethPrice) {
-      try {
-        const pr = await fetch('https://coins.llama.fi/prices/current/coingecko:ethereum')
-        const pj = (await pr.json()) as { coins: Record<string, { price: number }> }
-        ethPrice = pj?.coins?.['coingecko:ethereum']?.price || 0
-      } catch {
-        ethPrice = 0
-      }
-    }
-    const ethAmt = Number(addr?.coin_balance || 0) / 1e18
-    const ethUsd = ethAmt * ethPrice
-    if (ethUsd >= MIN_USD) items.unshift({ symbol: 'ETH', name: 'Ethereum', usd: ethUsd })
-
-    if (!items.length) throw new Error('no priced holdings')
-    return build(items, true)
+    const p = await fetchPortfolio(SHOWCASE.address, SHOWCASE.label)
+    if (!p.holdings.length) throw new Error('empty')
+    return p
   } catch {
-    return build(FALLBACK_ITEMS, false)
+    return build(SHOWCASE.label, SHOWCASE.address, FALLBACK_ITEMS, false)
   }
 }
