@@ -72,7 +72,7 @@ export default function Hero() {
   return (
     <section id="top" className="relative flex min-h-[100svh] items-center overflow-hidden bg-ink-900">
       {/* cinematic base plate — a hyperspace light tunnel (a literal vector, north) */}
-      <VideoBackdrop sceneId="hero" className="z-0" overlay={0.5} parallax={false} />
+      <VideoBackdrop sceneId="hero" className="z-0" overlay={0.38} parallax={false} />
 
       {/* warm vignette — pulls the cool footage toward the brand amber */}
       <div
