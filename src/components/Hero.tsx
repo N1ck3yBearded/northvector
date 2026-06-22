@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
-import FiberLines from './FiberLines'
+import HeroField from './HeroField'
 import { BRAND, BUILD_NOUNS, HERO } from '../data'
 
 const ease = [0.16, 1, 0.3, 1] as const
@@ -65,30 +65,27 @@ export default function Hero() {
   const reduced = reducedMotion()
   const { scrollYProgress } = useScroll()
   const y = useTransform(scrollYProgress, [0, 0.2], [0, 110])
-  const linesY = useTransform(scrollYProgress, [0, 0.3], [0, -70])
+  const fieldY = useTransform(scrollYProgress, [0, 0.3], [0, -60])
   const opacity = useTransform(scrollYProgress, [0, 0.18], [1, 0])
 
   return (
     <section id="top" className="relative flex min-h-[100svh] items-center overflow-hidden">
-      {/* monochrome base — a single faint warm vignette, nothing else */}
+      {/* warm vignette base */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
           background:
-            'radial-gradient(110% 90% at 62% 38%, rgba(214,168,106,0.08), transparent 58%)',
+            'radial-gradient(120% 95% at 60% 36%, rgba(214,168,106,0.10), transparent 60%)',
         }}
       />
 
-      {/* woven fibers — bulk of the bundle, BEHIND the headline */}
-      <motion.div
-        style={{ y: linesY }}
-        className="pointer-events-none absolute inset-0 z-[1]"
-      >
-        <FiberLines className="h-full w-full" count={26} reduced={reduced} seed={7} />
+      {/* living north-vector field — reacts to the cursor */}
+      <motion.div style={{ y: fieldY }} className="pointer-events-none absolute inset-0 z-[1]">
+        <HeroField reduced={reduced} />
       </motion.div>
 
       {/* legibility scrims */}
-      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-r from-ink-900 via-ink-900/40 to-ink-900/10" />
+      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-r from-ink-900 via-ink-900/55 to-ink-900/15" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-44 bg-gradient-to-t from-ink-900 to-transparent" />
 
       <motion.div
@@ -141,24 +138,6 @@ export default function Hero() {
             Start a project
           </a>
         </motion.div>
-      </motion.div>
-
-      {/* a few accent strands woven OVER the type via blend — the "woven" read */}
-      <motion.div
-        style={{ y: linesY }}
-        className="pointer-events-none absolute inset-0 z-[20] mix-blend-soft-light"
-      >
-        <FiberLines
-          className="h-full w-full"
-          count={7}
-          accent="#d6a86a"
-          accentIndices={[0, 1, 2, 3, 4, 5, 6]}
-          baseOpacity={0.6}
-          strokeBase={1.2}
-          delayBase={0.6}
-          reduced={reduced}
-          seed={31}
-        />
       </motion.div>
 
       <motion.div
