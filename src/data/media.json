@@ -1,13 +1,13 @@
 {
   "scenes": {
     "hero": {
-      "url": "https://videos.pexels.com/video-files/9965968/9965968-hd_1920_1080_25fps.mp4",
-      "poster": "https://images.pexels.com/videos/9965968/pexels-photo-9965968.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=630&w=1200",
+      "url": "https://videos.pexels.com/video-files/29109524/12575396_1920_1080_30fps.mp4",
+      "poster": "https://images.pexels.com/videos/29109524/abstract-background-beam-black-29109524.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=630&w=1200",
       "width": 3840,
       "height": 2160,
-      "credit": "Dan Cristian Pădureț",
-      "creditUrl": "https://www.pexels.com/@paduret",
-      "pexelsUrl": "https://www.pexels.com/video/close-up-on-colorful-painting-9965968/"
+      "credit": "Chandresh Uike",
+      "creditUrl": "https://www.pexels.com/@chandresh-uike-754623426",
+      "pexelsUrl": "https://www.pexels.com/video/futuristic-hyperspace-light-tunnel-29109524/"
     },
     "idea": {
       "url": "https://videos.pexels.com/video-files/30133176/12921696_1920_1080_30fps.mp4",

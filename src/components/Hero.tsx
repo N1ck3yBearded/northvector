@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import HeroField from './HeroField'
+import VideoBackdrop from './VideoBackdrop'
 import { BRAND, BUILD_NOUNS, HERO } from '../data'
 
 const ease = [0.16, 1, 0.3, 1] as const
@@ -69,18 +70,24 @@ export default function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.18], [1, 0])
 
   return (
-    <section id="top" className="relative flex min-h-[100svh] items-center overflow-hidden">
-      {/* warm vignette base */}
+    <section id="top" className="relative flex min-h-[100svh] items-center overflow-hidden bg-ink-900">
+      {/* cinematic base plate — a hyperspace light tunnel (a literal vector, north) */}
+      <VideoBackdrop sceneId="hero" className="z-0" overlay={0.5} parallax={false} />
+
+      {/* warm vignette — pulls the cool footage toward the brand amber */}
       <div
-        className="pointer-events-none absolute inset-0 z-0"
+        className="pointer-events-none absolute inset-0 z-[1] mix-blend-soft-light"
         style={{
           background:
-            'radial-gradient(120% 95% at 60% 36%, rgba(214,168,106,0.10), transparent 60%)',
+            'radial-gradient(120% 95% at 60% 36%, rgba(214,168,106,0.28), transparent 60%)',
         }}
       />
 
-      {/* living north-vector field — reacts to the cursor */}
-      <motion.div style={{ y: fieldY }} className="pointer-events-none absolute inset-0 z-[1]">
+      {/* living north-vector field — reacts to the cursor, woven over the plate */}
+      <motion.div
+        style={{ y: fieldY }}
+        className="pointer-events-none absolute inset-0 z-[1] opacity-40 mix-blend-screen"
+      >
         <HeroField reduced={reduced} />
       </motion.div>
 
