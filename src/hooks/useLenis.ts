@@ -10,9 +10,11 @@ export function useLenis() {
     window.scrollTo(0, 0)
 
     const lenis = new Lenis({
-      duration: 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      // Buttery gliding scroll — a low lerp trails the wheel for a smooth,
+      // cinematic feel (drives the scroll-film scrub too).
+      lerp: 0.08,
       smoothWheel: true,
+      wheelMultiplier: 0.95,
     })
     lenis.scrollTo(0, { immediate: true })
     if (import.meta.env.DEV) {

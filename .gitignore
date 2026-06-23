@@ -34,3 +34,6 @@ dist-ssr
 # Studio internals - local only, never published
 CLAUDE.md
 .claude/
+
+# Working files (local only, not deployed)
+brief/

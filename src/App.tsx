@@ -1,7 +1,7 @@
 import { MotionConfig } from 'framer-motion'
 import { useLenis } from './hooks/useLenis'
 import Nav from './components/Nav'
-import Hero from './components/Hero'
+import ScrollFilm from './components/ScrollFilm'
 import Manifesto from './components/Manifesto'
 import Showreel from './components/Showreel'
 import PyLab from './components/PyLab'
@@ -18,7 +18,7 @@ function App() {
       <div className="grain relative min-h-screen bg-ink-900">
         <Nav />
         <main>
-          <Hero />
+          <ScrollFilm />
           <Manifesto />
           <Showreel />
           <PyLab />
