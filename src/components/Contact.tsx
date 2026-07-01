@@ -1,10 +1,14 @@
 import { motion } from 'framer-motion'
 import VideoBackdrop from './VideoBackdrop'
+import ContactForm from './ContactForm'
 import { BRAND, CONTACT } from '../data'
+import { useT } from '../lib/i18n'
 
 const ease = [0.16, 1, 0.3, 1] as const
 
 export default function Contact() {
+  const t = useT()
+
   return (
     <section id="contact" className="relative overflow-hidden border-t border-white/5 py-32 sm:py-44">
       <VideoBackdrop sceneId="closing" overlay={0.72} />
@@ -18,7 +22,7 @@ export default function Contact() {
           transition={{ duration: 0.6, ease }}
           className="eyebrow text-amber"
         >
-          {CONTACT.kicker}
+          {t(CONTACT.kicker)}
         </motion.span>
 
         <motion.h2
@@ -28,7 +32,7 @@ export default function Contact() {
           transition={{ duration: 0.8, ease, delay: 0.08 }}
           className="display mx-auto mt-7 max-w-3xl text-[clamp(2.4rem,6.5vw,5rem)] font-medium leading-[0.98] tracking-[-0.01em] text-mist-100"
         >
-          {CONTACT.title} <span className="italic text-amber">{CONTACT.titleAccent}</span>
+          {t(CONTACT.title)} <span className="italic text-amber">{t(CONTACT.titleAccent)}</span>
         </motion.h2>
 
         <motion.p
@@ -38,7 +42,7 @@ export default function Contact() {
           transition={{ duration: 0.7, ease, delay: 0.16 }}
           className="mx-auto mt-7 max-w-xl text-[15px] leading-relaxed text-mist-300 sm:text-base"
         >
-          {CONTACT.body}
+          {t(CONTACT.body)}
         </motion.p>
 
         <motion.div
@@ -48,15 +52,9 @@ export default function Contact() {
           transition={{ duration: 0.7, ease, delay: 0.24 }}
           className="mt-12"
         >
-          <a
-            href={`mailto:${BRAND.contact}?subject=Project%20idea%20—%20Northvector`}
-            className="group inline-flex items-center gap-2 rounded-full bg-mist-100 px-8 py-4 text-sm font-medium text-ink-900 transition-transform duration-200 hover:-translate-y-0.5"
-          >
-            Start a project
-            <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-          </a>
+          <ContactForm />
           <p className="mt-7 font-mono text-[11px] uppercase tracking-ultra text-mist-500">
-            {BRAND.founder} replies personally, usually same day · {BRAND.location}
+            {t(CONTACT.sla)} · {t(BRAND.location)}
           </p>
         </motion.div>
       </div>

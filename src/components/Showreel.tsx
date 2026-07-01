@@ -1,6 +1,7 @@
 import { Suspense, lazy, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { SCENES } from '../data'
+import { SCENES, SHOWREEL_INTRO, EDITORIAL } from '../data'
+import { useT, useLang } from '../lib/i18n'
 import DefiDashboard from './DefiDashboard'
 
 const ImmersiveCanvas = lazy(() => import('./ImmersiveCanvas'))
@@ -14,6 +15,7 @@ const accentHex: Record<string, string> = {
 }
 
 function SceneHeader({ scene, dark = true }: { scene: (typeof SCENES)[number]; dark?: boolean }) {
+  const t = useT()
   const sub = dark ? 'text-mist-500' : 'text-paper-900/60'
   const body = dark ? 'text-mist-300' : 'text-paper-900/75'
   const title = dark ? 'text-mist-100' : 'text-paper-900'
@@ -24,14 +26,14 @@ function SceneHeader({ scene, dark = true }: { scene: (typeof SCENES)[number]; d
           {scene.index}
         </span>
         <span className="eyebrow" style={{ color: accentHex[scene.accent] }}>
-          {scene.kicker}
+          {t(scene.kicker)}
         </span>
       </div>
       <h3 className={`display mt-5 text-[clamp(1.8rem,4vw,3.2rem)] font-medium leading-[1.04] tracking-[-0.01em] ${title}`}>
-        {scene.title}
+        {t(scene.title)}
       </h3>
-      <p className={`mt-5 max-w-md text-[15px] leading-relaxed ${body}`}>{scene.body}</p>
-      <p className={`mt-6 font-mono text-[11px] uppercase tracking-ultra ${sub}`}>{scene.style}</p>
+      <p className={`mt-5 max-w-md text-[15px] leading-relaxed ${body}`}>{t(scene.body)}</p>
+      <p className={`mt-6 font-mono text-[11px] uppercase tracking-ultra ${sub}`}>{t(scene.style)}</p>
     </div>
   )
 }
@@ -65,6 +67,8 @@ function ImmersiveScene() {
 /* 02 — Editorial: light, airy, serif */
 function EditorialScene() {
   const scene = SCENES[1]
+  const t = useT()
+  const { lang } = useLang()
   return (
     <div className="relative overflow-hidden rounded-[32px] bg-paper-50 p-10 sm:p-16">
       <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
@@ -75,16 +79,16 @@ function EditorialScene() {
           </div>
           <div className="mt-6 grid grid-cols-2 gap-6 border-t border-paper-900/10 pt-6">
             <p className="text-[13px] leading-relaxed text-paper-900/70">
-              Type that carries the brand. Measured columns, real hierarchy, and white space used on purpose.
+              {t(EDITORIAL.lineA)}
             </p>
             <p className="text-[13px] leading-relaxed text-paper-900/70">
-              The same person who builds the dark, kinetic stuff also knows when to step back and let the work breathe.
+              {t(EDITORIAL.lineB)}
             </p>
           </div>
           <div className="mt-6 flex gap-2">
-            {['Serif', 'Editorial', 'Whitespace'].map((t) => (
-              <span key={t} className="rounded-full border border-paper-900/15 px-3 py-1 font-mono text-[10px] uppercase tracking-wide text-paper-900/60">
-                {t}
+            {EDITORIAL.tags[lang].map((tag) => (
+              <span key={tag} className="rounded-full border border-paper-900/15 px-3 py-1 font-mono text-[10px] uppercase tracking-wide text-paper-900/60">
+                {tag}
               </span>
             ))}
           </div>
@@ -106,6 +110,7 @@ function ProductScene() {
 }
 
 export default function Showreel() {
+  const t = useT()
   return (
     <section id="showreel" className="relative border-t border-white/5 py-28 sm:py-36">
       <div className="container-px mx-auto max-w-[1200px]">
@@ -116,13 +121,12 @@ export default function Showreel() {
           transition={{ duration: 0.7, ease }}
           className="max-w-2xl"
         >
-          <span className="eyebrow text-jade">Showreel</span>
+          <span className="eyebrow text-jade">{t(SHOWREEL_INTRO.kicker)}</span>
           <h2 className="display mt-5 text-[clamp(2rem,5vw,3.8rem)] font-medium leading-[1.02] tracking-[-0.01em] text-mist-100">
-            One person. <span className="italic text-amber">Any</span> style.
+            {t(SHOWREEL_INTRO.title)}
           </h2>
           <p className="mt-5 text-[15px] leading-relaxed text-mist-300">
-            I don’t have one signature look. Below are three builds in three different styles — dark 3D,
-            quiet editorial, a live product UI — all running right here, not screenshots.
+            {t(SHOWREEL_INTRO.body)}
           </p>
         </motion.div>
 

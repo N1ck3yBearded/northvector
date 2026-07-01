@@ -1,50 +1,35 @@
 {
   "scenes": {
     "hero": {
-      "url": "https://videos.pexels.com/video-files/29109524/12575396_1920_1080_30fps.mp4",
-      "poster": "https://images.pexels.com/videos/29109524/abstract-background-beam-black-29109524.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=630&w=1200",
-      "width": 3840,
-      "height": 2160,
-      "credit": "Chandresh Uike",
-      "creditUrl": "https://www.pexels.com/@chandresh-uike-754623426",
-      "pexelsUrl": "https://www.pexels.com/video/futuristic-hyperspace-light-tunnel-29109524/"
+      "url": "/bg/bg1-loop.mp4",
+      "poster": "/bg/bg1.webp",
+      "width": 1920,
+      "height": 1080
     },
     "idea": {
-      "url": "https://videos.pexels.com/video-files/30133176/12921696_1920_1080_30fps.mp4",
-      "poster": "https://images.pexels.com/videos/30133176/pexels-photo-30133176.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=630&w=1200",
+      "url": "/bg/bg1-loop.mp4",
+      "poster": "/bg/bg1.webp",
       "width": 1920,
-      "height": 1080,
-      "credit": "Nicola Narracci",
-      "creditUrl": "https://www.pexels.com/@nicola-narracci-157460431",
-      "pexelsUrl": "https://www.pexels.com/video/abstract-glowing-orb-with-moving-particle-trail-30133176/"
+      "height": 1080
     },
     "build": {
-      "url": "https://videos.pexels.com/video-files/4513055/4513055-hd_2048_1080_24fps.mp4",
-      "poster": "https://images.pexels.com/videos/4513055/cleaning-drink-drops-glass-4513055.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=630&w=1200",
-      "width": 4096,
-      "height": 2160,
-      "credit": "Anastasia  Shuraeva",
-      "creditUrl": "https://www.pexels.com/@anastasia-shuraeva",
-      "pexelsUrl": "https://www.pexels.com/video/a-black-and-white-photo-of-a-white-floor-4513055/"
+      "url": "/bg/bg1-loop.mp4",
+      "poster": "/bg/bg1.webp",
+      "width": 1920,
+      "height": 1080
     },
     "immersive": {
-      "url": "https://videos.pexels.com/video-files/7467279/7467279-hd_1920_1080_30fps.mp4",
-      "poster": "https://images.pexels.com/videos/7467279/pexels-photo-7467279.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=630&w=1200",
+      "url": "/bg/bg1-loop.mp4",
+      "poster": "/bg/bg1.webp",
       "width": 1920,
-      "height": 1080,
-      "credit": "urpina art's",
-      "creditUrl": "https://www.pexels.com/@urpina-art-s-45421811",
-      "pexelsUrl": "https://www.pexels.com/video/close-up-view-of-motion-paint-7467279/"
+      "height": 1080
     },
     "closing": {
-      "url": "https://videos.pexels.com/video-files/31280471/13358080_1920_1080_25fps.mp4",
-      "poster": "https://images.pexels.com/videos/31280471/aurora-aurora-borealis-canon-90d-canon-eos-90d-31280471.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=630&w=1200",
+      "url": "/bg/bg1-loop.mp4",
+      "poster": "/bg/bg1.webp",
       "width": 1920,
-      "height": 1080,
-      "credit": "Efrem  Efre",
-      "creditUrl": "https://www.pexels.com/@efrem-efre-2786187",
-      "pexelsUrl": "https://www.pexels.com/video/stunning-display-of-northern-lights-in-sweden-31280471/"
+      "height": 1080
     }
   },
-  "attribution": "Pexels"
+  "attribution": "Northvector"
 }

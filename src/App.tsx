@@ -1,7 +1,9 @@
 import { MotionConfig } from 'framer-motion'
 import { useLenis } from './hooks/useLenis'
+import { LangProvider } from './lib/LangProvider'
 import Nav from './components/Nav'
-import ScrollFilm from './components/ScrollFilm'
+import Hero from './components/Hero'
+import Packages from './components/Packages'
 import Manifesto from './components/Manifesto'
 import Showreel from './components/Showreel'
 import PyLab from './components/PyLab'
@@ -14,21 +16,24 @@ function App() {
   useLenis()
 
   return (
-    <MotionConfig reducedMotion="user">
-      <div className="grain relative min-h-screen bg-ink-900">
-        <Nav />
-        <main>
-          <ScrollFilm />
-          <Manifesto />
-          <Showreel />
-          <PyLab />
-          <Capabilities />
-          <Work />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
-    </MotionConfig>
+    <LangProvider>
+      <MotionConfig reducedMotion="user">
+        <div className="relative min-h-screen bg-ink-900">
+          <Nav />
+          <main>
+            <Hero />
+            <Packages />
+            <Manifesto />
+            <Showreel />
+            <PyLab />
+            <Capabilities />
+            <Work />
+            <Contact />
+          </main>
+          <Footer />
+        </div>
+      </MotionConfig>
+    </LangProvider>
   )
 }
 

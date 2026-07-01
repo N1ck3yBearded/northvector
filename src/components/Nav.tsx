@@ -1,18 +1,39 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import Logo from './Logo'
+import { NAV } from '../data'
+import { useLang, useT, type Lang } from '../lib/i18n'
 
-const LINKS = [
-  { label: 'Manifesto', href: '#manifesto' },
-  { label: 'Showreel', href: '#showreel' },
-  { label: 'Lab', href: '#lab' },
-  { label: 'Work', href: '#work' },
-]
+function LangToggle({ className = '' }: { className?: string }) {
+  const { lang, setLang } = useLang()
+  const opts: Lang[] = ['en', 'ru']
+  return (
+    <div
+      role="group"
+      aria-label="Language"
+      className={`inline-flex items-center rounded-full border border-white/10 p-0.5 font-mono text-[11px] uppercase tracking-wide ${className}`}
+    >
+      {opts.map((o) => (
+        <button
+          key={o}
+          onClick={() => setLang(o)}
+          aria-pressed={lang === o}
+          className={`rounded-full px-2 py-0.5 transition-colors ${
+            lang === o ? 'bg-amber/15 text-amber' : 'text-mist-500 hover:text-mist-300'
+          }`}
+        >
+          {o}
+        </button>
+      ))}
+    </div>
+  )
+}
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const headerRef = useRef<HTMLElement>(null)
+  const t = useT()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -54,23 +75,26 @@ export default function Nav() {
         <Logo />
 
         <div className="hidden items-center gap-8 md:flex">
-          {LINKS.map((l) => (
+          {NAV.links.map((l) => (
             <a
               key={l.href}
               href={l.href}
               className="text-[13px] text-mist-300 transition-colors duration-200 hover:text-amber"
             >
-              {l.label}
+              {t(l.label)}
             </a>
           ))}
         </div>
 
-        <a
-          href="#contact"
-          className="hidden rounded-full border border-amber/40 bg-amber/10 px-4 py-2 text-[13px] font-medium text-amber transition-colors duration-200 hover:bg-amber/20 md:inline-block"
-        >
-          Let’s talk
-        </a>
+        <div className="hidden items-center gap-3 md:flex">
+          <LangToggle />
+          <a
+            href="#contact"
+            className="rounded-full border border-amber/40 bg-amber/10 px-4 py-2 text-[13px] font-medium text-amber transition-colors duration-200 hover:bg-amber/20"
+          >
+            {t(NAV.cta)}
+          </a>
+        </div>
 
         <button
           aria-label={open ? 'Close menu' : 'Open menu'}
@@ -95,23 +119,26 @@ export default function Nav() {
           className="absolute top-[68px] w-[92vw] rounded-2xl border border-white/10 bg-ink-800/90 p-5 backdrop-blur-xl md:hidden"
         >
           <div className="flex flex-col gap-4">
-            {LINKS.map((l) => (
+            {NAV.links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
                 className="text-sm text-mist-300 hover:text-amber"
               >
-                {l.label}
+                {t(l.label)}
               </a>
             ))}
-            <a
-              href="#contact"
-              onClick={() => setOpen(false)}
-              className="mt-1 rounded-full border border-amber/40 bg-amber/10 px-4 py-2.5 text-center text-sm font-medium text-amber"
-            >
-              Let’s talk
-            </a>
+            <div className="flex items-center justify-between pt-1">
+              <LangToggle />
+              <a
+                href="#contact"
+                onClick={() => setOpen(false)}
+                className="rounded-full border border-amber/40 bg-amber/10 px-4 py-2.5 text-center text-sm font-medium text-amber"
+              >
+                {t(NAV.cta)}
+              </a>
+            </div>
           </div>
         </motion.div>
       )}

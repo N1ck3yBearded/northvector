@@ -2,12 +2,10 @@ import manifest from '../data/media.json'
 
 export type Clip = {
   url: string
+  urlMobile?: string
   poster: string
   width: number
   height: number
-  credit: string
-  creditUrl: string
-  pexelsUrl: string
 }
 
 type Manifest = {
@@ -25,8 +23,8 @@ export function hasMedia(): boolean {
   return Object.keys(data.scenes ?? {}).length > 0
 }
 
-// Distinct fallback gradient per scene so the storyboard reads even before
-// the Pexels clips are fetched (npm run media).
+// Distinct fallback gradient per scene so the storyboard reads even if a
+// local backdrop clip fails to load.
 export const FALLBACK_GRADIENT: Record<string, string> = {
   hero: 'radial-gradient(120% 120% at 70% 20%, rgba(214,168,106,0.22), transparent 55%), radial-gradient(100% 100% at 20% 90%, rgba(109,183,160,0.16), transparent 60%)',
   idea: 'radial-gradient(120% 120% at 30% 30%, rgba(154,143,214,0.20), transparent 60%)',

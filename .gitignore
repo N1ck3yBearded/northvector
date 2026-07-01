@@ -37,3 +37,8 @@ CLAUDE.md
 
 # Working files (local only, not deployed)
 brief/
+
+# Raw asset originals (heavy source; only the optimized public/ derivatives ship)
+assets-raw/
+
+.vercel
