@@ -1,0 +1,19 @@
+{
+  "commit": "04ee0b4",
+  "commits": 17,
+  "firstCommit": "2026-06-21",
+  "lastCommit": "2026-07-01",
+  "tsFiles": 25,
+  "components": 15,
+  "bundleJsGzipKb": 127,
+  "bundleCssGzipKb": 6,
+  "bundleTotalGzipKb": 135,
+  "stack": ["React 19", "TypeScript", "Vite", "Tailwind", "Framer Motion"],
+  "runtime": ["Raw WebGL / GLSL (no 3D lib)", "Pyodide — CPython in WASM", "On-chain reads, keyless"],
+  "posture": {
+    "reducedMotion": true,
+    "heavyMediaGatedToUltra": true,
+    "noBackend": true,
+    "bilingual": true
+  }
+}

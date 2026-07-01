@@ -9,8 +9,10 @@ import Showreel from './components/Showreel'
 import PyLab from './components/PyLab'
 import Capabilities from './components/Capabilities'
 import Work from './components/Work'
+import SelfAudit from './components/SelfAudit'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import CommandPalette from './components/CommandPalette'
 
 function App() {
   useLenis()
@@ -28,9 +30,11 @@ function App() {
             <PyLab />
             <Capabilities />
             <Work />
+            <SelfAudit />
             <Contact />
           </main>
           <Footer />
+          <CommandPalette />
         </div>
       </MotionConfig>
     </LangProvider>
